@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>INACAP | Directorio Interactivo & Seguridad</title>
+  <title>INACAP | Plano de Ubicación, Vías de Escape y Seguridad</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -18,6 +18,7 @@
       --gray-light: #F4F5F7;
       --border: #E2E5E9;
       --safe-green: #16A34A;
+      --safe-dark: #15803D;
       --hydrant-blue: #0284C7;
       --dry-orange: #EA580C;
     }
@@ -51,7 +52,7 @@
       width: auto;
       max-width: 100vw;
       background-color: #FFFFFF;
-      /* Puedes activar tu fondo personalizado aquí descomentando la siguiente línea: */
+      /* Descomenta la siguiente línea para montar tu lámina de fondo JPG 900x1700: */
       /* background-image: url('fondo-inacap.jpg'); background-size: 100% 100%; */
       display: flex;
       flex-direction: column;
@@ -77,9 +78,9 @@
     .header {
       position: relative;
       z-index: 2;
-      padding: 3.2vh 5% 1.5vh;
+      padding: 3vh 5% 1.2vh;
       text-align: center;
-      background: linear-gradient(180deg, #FFFFFF 75%, rgba(255,255,255,0) 100%);
+      background: linear-gradient(180deg, #FFFFFF 78%, rgba(255,255,255,0) 100%);
     }
 
     .brand-bar {
@@ -94,7 +95,7 @@
       background: var(--red-inacap);
       color: #FFF;
       font-weight: 900;
-      font-size: clamp(18px, 2.8vh, 26px);
+      font-size: clamp(18px, 2.7vh, 25px);
       letter-spacing: 1.5px;
       padding: 4px 14px;
       border-radius: 6px;
@@ -113,21 +114,22 @@
     }
 
     .header h1 {
-      font-size: clamp(16px, 2.3vh, 22px);
+      font-size: clamp(14px, 2.05vh, 19px);
       font-weight: 800;
       color: var(--dark);
-      line-height: 1.15;
+      line-height: 1.2;
+      padding: 0 4px;
     }
 
     .location-pill {
-      margin-top: 1vh;
+      margin-top: 0.9vh;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       background: #FFF1F2;
       border: 1px solid #FECDD3;
       color: var(--red-dark);
-      font-size: clamp(10px, 1.35vh, 13px);
+      font-size: clamp(10px, 1.3vh, 12.5px);
       font-weight: 700;
       padding: 5px 12px;
       border-radius: 999px;
@@ -149,7 +151,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1.5vh;
+      gap: 1.4vh;
       padding: 0 6%;
     }
 
@@ -159,14 +161,14 @@
       background: #FFFFFF;
       border: 1.5px solid var(--border);
       border-radius: 16px;
-      padding: 1.6vh 16px;
+      padding: 1.55vh 15px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 13px;
       text-align: left;
       cursor: pointer;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     .menu-btn:active {
@@ -181,14 +183,14 @@
     }
 
     .btn-icon {
-      width: clamp(38px, 5.2vh, 48px);
-      height: clamp(38px, 5.2vh, 48px);
+      width: clamp(38px, 5vh, 46px);
+      height: clamp(38px, 5vh, 46px);
       border-radius: 12px;
       background: var(--gray-light);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: clamp(18px, 2.5vh, 24px);
+      font-size: clamp(18px, 2.4vh, 23px);
       flex-shrink: 0;
     }
 
@@ -202,7 +204,7 @@
     }
 
     .btn-title {
-      font-size: clamp(13px, 1.85vh, 17px);
+      font-size: clamp(13px, 1.8vh, 16.5px);
       font-weight: 800;
       color: var(--dark);
       display: block;
@@ -214,7 +216,7 @@
     }
 
     .btn-sub {
-      font-size: clamp(10px, 1.35vh, 12.5px);
+      font-size: clamp(10px, 1.3vh, 12px);
       color: var(--gray-text);
       display: block;
       margin-top: 2px;
@@ -224,7 +226,7 @@
     }
 
     .menu-btn.primary .btn-sub {
-      color: rgba(255, 255, 255, 0.88);
+      color: rgba(255, 255, 255, 0.9);
     }
 
     /* Mano táctil pulsante obligatoria */
@@ -243,7 +245,7 @@
     }
 
     .btn-row .menu-btn {
-      padding: 1.5vh 12px;
+      padding: 1.45vh 12px;
       flex-direction: column;
       align-items: flex-start;
       gap: 6px;
@@ -262,7 +264,7 @@
       z-index: 2;
       background: var(--dark);
       color: #FFFFFF;
-      padding: 1.8vh 6%;
+      padding: 1.75vh 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -328,7 +330,7 @@
     .modal-sheet {
       background: #FFFFFF;
       width: 100%;
-      height: 92%;
+      height: 93%;
       border-top-left-radius: 24px;
       border-top-right-radius: 24px;
       display: flex;
@@ -338,7 +340,7 @@
     }
 
     .modal-header {
-      padding: 14px 18px;
+      padding: 13px 16px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -347,19 +349,19 @@
     }
 
     .modal-header h2 {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       color: var(--dark);
     }
 
     .close-btn {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       border: none;
       background: var(--gray-light);
       color: var(--dark);
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
       cursor: pointer;
     }
@@ -368,7 +370,7 @@
     .viewer-wrapper {
       position: relative;
       width: 100%;
-      height: 44%;
+      height: 45%;
       background: radial-gradient(circle at center, #F8FAFC 0%, #E2E8F0 100%);
       border-bottom: 1px solid var(--border);
       overflow: hidden;
@@ -383,69 +385,147 @@
 
     .viewer-hint {
       position: absolute;
-      top: 10px;
-      left: 12px;
-      background: rgba(26, 26, 26, 0.78);
+      top: 9px;
+      left: 10px;
+      background: rgba(26, 26, 26, 0.8);
       color: #FFF;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
-      padding: 4px 10px;
+      padding: 4px 9px;
       border-radius: 999px;
       pointer-events: none;
     }
 
-    .safety-toggle {
+    .stairs-badge {
       position: absolute;
-      bottom: 10px;
-      right: 12px;
-      background: #FFFFFF;
-      border: 1.5px solid var(--safe-green);
-      color: var(--safe-green);
-      font-size: 11px;
+      top: 9px;
+      right: 10px;
+      background: #DCFCE7;
+      border: 1px solid #86EFAC;
+      color: #14532D;
+      font-size: 10px;
       font-weight: 800;
-      padding: 6px 12px;
+      padding: 4px 8px;
       border-radius: 999px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-      display: flex;
-      align-items: center;
-      gap: 5px;
+      pointer-events: none;
     }
 
-    .safety-toggle.on {
+    /* BARRA DOBLE DE CONTROLES DE SEGURIDAD SOBRE EL 3D */
+    .safety-bar {
+      position: absolute;
+      bottom: 9px;
+      left: 10px;
+      right: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    .safety-toggle {
+      background: #FFFFFF;
+      border: 1.5px solid var(--safe-green);
+      color: var(--safe-dark);
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 7px 8px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .safety-toggle.escape-btn {
+      border-color: var(--safe-green);
+      color: var(--safe-dark);
+    }
+
+    .safety-toggle.escape-btn.on {
       background: var(--safe-green);
+      color: #FFFFFF;
+    }
+
+    .safety-toggle.equip-btn {
+      border-color: var(--red-inacap);
+      color: var(--red-dark);
+    }
+
+    .safety-toggle.equip-btn.on {
+      background: var(--red-inacap);
       color: #FFFFFF;
     }
 
     .floor-controls {
       flex: 1;
-      padding: 14px 18px;
+      padding: 12px 16px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
     }
 
     .route-banner {
       background: #FEF2F2;
       border-left: 4px solid var(--red-inacap);
-      padding: 10px 12px;
+      padding: 9px 11px;
       border-radius: 8px;
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--dark);
       font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .escape-banner {
+      background: #F0FDF4;
+      border: 1.5px solid #86EFAC;
+      border-left: 5px solid var(--safe-green);
+      padding: 9px 11px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      color: #14532D;
+      display: none;
+      line-height: 1.35;
+    }
+
+    .escape-banner.visible {
+      display: block;
+    }
+
+    .safety-legend {
+      background: #FFF7ED;
+      border: 1px solid #FED7AA;
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-size: 11px;
+      color: #7C2D12;
+      display: none;
+    }
+
+    .safety-legend.visible {
+      display: block;
+    }
+
+    .legend-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+      font-weight: 700;
     }
 
     .poi-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 7px;
     }
 
     .poi-card {
       border: 1.5px solid var(--border);
       border-radius: 10px;
-      padding: 9px 10px;
+      padding: 8px 10px;
       background: #FFF;
       cursor: pointer;
       text-align: left;
@@ -459,52 +539,57 @@
 
     .poi-card strong {
       display: block;
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--dark);
     }
 
     .poi-card span {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--gray-text);
     }
 
-    .safety-legend {
-      background: #F0FDF4;
-      border: 1px solid #BBF7D0;
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 11.5px;
-      color: #14532D;
-      display: none;
-    }
-
-    .safety-legend.visible {
-      display: block;
-    }
-
-    .legend-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-      font-weight: 700;
-    }
-
-    /* CONTENIDO OTROS MODALES */
+    /* BUSCADOR POR PISO */
     .modal-body {
-      padding: 18px;
+      padding: 15px 16px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
+    }
+
+    .floor-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      background: var(--gray-light);
+      padding: 4px;
+      border-radius: 12px;
+    }
+
+    .floor-tab {
+      border: none;
+      background: transparent;
+      padding: 9px 6px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gray-text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .floor-tab.active {
+      background: var(--red-inacap);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(227, 6, 19, 0.25);
     }
 
     .search-input {
       width: 100%;
-      padding: 12px 14px;
+      padding: 11px 13px;
       border-radius: 12px;
       border: 2px solid var(--border);
-      font-size: 14px;
+      font-size: 13.5px;
       font-family: inherit;
       outline: none;
     }
@@ -516,21 +601,26 @@
     .info-card {
       background: var(--gray-light);
       border-radius: 12px;
-      padding: 12px 14px;
+      padding: 11px 13px;
       border-left: 4px solid var(--red-inacap);
     }
 
+    .info-card.safe-card {
+      border-left-color: var(--safe-green);
+      background: #F0FDF4;
+    }
+
     .info-card h3 {
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 800;
       color: var(--dark);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .info-card p {
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--gray-text);
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
     .call-btn {
@@ -542,8 +632,8 @@
       color: #FFF;
       text-decoration: none;
       font-weight: 800;
-      font-size: 14px;
-      padding: 13px;
+      font-size: 13.5px;
+      padding: 12px;
       border-radius: 12px;
       margin-top: 6px;
     }
@@ -573,7 +663,7 @@
         <span class="brand-logo">INACAP</span>
         <span class="pilot-tag">Sede Apoquindo • Piloto</span>
       </div>
-      <h1>Directorio Interactivo y Seguridad</h1>
+      <h1>Plano de Ubicación, Vías de Escape y Seguridad</h1>
       <div class="location-pill">
         <span class="pulse-dot"></span>
         <span>Estás aquí: Tótem Hall Central • Piso 1</span>
@@ -585,8 +675,8 @@
       <button class="menu-btn primary" onclick="openFloorModal(1)">
         <div class="btn-icon">🏢</div>
         <div class="btn-text">
-          <span class="btn-title">Piso 1 — Acceso y Servicios</span>
-          <span class="btn-sub">Auditorio, Biblioteca, DAE, Casino y Extintores</span>
+          <span class="btn-title">Piso 1 — Acceso y Vías de Escape</span>
+          <span class="btn-sub">4 Escaleras, Salida Segura, Auditorio, DAE y Extintores</span>
         </div>
         <span class="touch-hand">👆</span>
       </button>
@@ -594,8 +684,8 @@
       <button class="menu-btn" onclick="openFloorModal(2)">
         <div class="btn-icon">🎓</div>
         <div class="btn-text">
-          <span class="btn-title">Piso 2 — Aulas y Laboratorios</span>
-          <span class="btn-sub">Salas 201–210, Lab. Computación y Red Húmeda</span>
+          <span class="btn-title">Piso 2 — Aulas, Escaleras y Redes</span>
+          <span class="btn-sub">Salas 201–210, 4 Escaleras Escape y Red Húmeda/Seca</span>
         </div>
         <span class="touch-hand">👆</span>
       </button>
@@ -603,8 +693,8 @@
       <button class="menu-btn" onclick="openModal('searchModal')">
         <div class="btn-icon">🔍</div>
         <div class="btn-text">
-          <span class="btn-title">¿A dónde vas? Buscador Rápido</span>
-          <span class="btn-sub">Encuentra salas, seminarios, baños o vías de escape</span>
+          <span class="btn-title">¿A dónde vas? Buscador por Piso</span>
+          <span class="btn-sub">Filtra Piso 1 o Piso 2: salas, salidas y seguridad</span>
         </div>
         <span class="touch-hand">👆</span>
       </button>
@@ -646,7 +736,7 @@
       </div>
     </footer>
 
-    <!-- MODAL 1: VISOR 3D DE PISOS + NORMATIVA SEGURIDAD -->
+    <!-- MODAL 1: VISOR 3D DE PISOS + VÍAS DE ESCAPE + EXTINTORES/REDES -->
     <div id="floorModal" class="modal-overlay">
       <div class="modal-sheet">
         <div class="modal-header">
@@ -656,11 +746,20 @@
 
         <div class="viewer-wrapper">
           <div id="three-container"></div>
-          <div class="viewer-hint">👆 Arrastra para rotar el plano 3D</div>
-          <button id="safetyBtn" class="safety-toggle" onclick="toggleSafetyLayer()">
-            <span>🛡️</span>
-            <span id="safetyBtnText">Ver Extintores y Redes</span>
-          </button>
+          <div class="viewer-hint">👆 Arrastra para rotar 3D</div>
+          <div class="stairs-badge">🟩 4 Escaleras + Salida</div>
+
+          <!-- DOS BOTONES DE SEGURIDAD INDEPENDIENTES -->
+          <div class="safety-bar">
+            <button id="escapeBtn" class="safety-toggle escape-btn" onclick="toggleEscapeRoutes()">
+              <span>🏃</span>
+              <span id="escapeBtnText">Vías de Escape</span>
+            </button>
+            <button id="safetyBtn" class="safety-toggle equip-btn" onclick="toggleSafetyLayer()">
+              <span>🧯</span>
+              <span id="safetyBtnText">Extintores y Redes</span>
+            </button>
+          </div>
         </div>
 
         <div class="floor-controls">
@@ -668,13 +767,21 @@
             📍 Toca un destino abajo para trazar la ruta en 3D desde el punto de inicio.
           </div>
 
+          <!-- PANEL INFORMATIVO VÍAS DE ESCAPE -->
+          <div id="escapeBanner" class="escape-banner">
+            <strong>🏃 Plan de Evacuación Activo (4 Escaleras + Salida):</strong><br>
+            • <strong>Escaleras 1 y 2 (Sector Norte):</strong> Evacúan hacia Patio Zona Segura.<br>
+            • <strong>Escaleras 3 y 4 (Sector Sur):</strong> Evacúan hacia Salida Principal Av. Apoquindo.<br>
+            <em>Siga las flechas verdes iluminadas en el plano 3D.</em>
+          </div>
+
+          <!-- LEYENDA EXTINTORES Y REDES -->
           <div id="safetyLegend" class="safety-legend">
-            <strong>Capa Normativa Activa (Prevención de Riesgos):</strong>
+            <strong>Equipos Contra Incendio (Normativa Vigente):</strong>
             <div class="legend-items">
-              <span>🧯 Extintor PQS</span>
+              <span>🧯 Extintor PQS/CO₂</span>
               <span>🔵 Red Húmeda</span>
               <span>🟠 Red Seca</span>
-              <span>🟢 Vía Evacuación</span>
             </div>
           </div>
 
@@ -683,7 +790,7 @@
       </div>
     </div>
 
-    <!-- MODAL 2: BUSCADOR RÁPIDO -->
+    <!-- MODAL 2: BUSCADOR POR PISO -->
     <div id="searchModal" class="modal-overlay">
       <div class="modal-sheet">
         <div class="modal-header">
@@ -691,7 +798,14 @@
           <button class="close-btn" onclick="closeModal('searchModal')">✕</button>
         </div>
         <div class="modal-body">
-          <input type="text" id="searchInput" class="search-input" placeholder="Ej: Auditorio, Sala 204, Biblioteca, Extintor..." oninput="filterSearch()" />
+          <!-- TABS POR PISO -->
+          <div class="floor-tabs">
+            <button id="tab-all" class="floor-tab active" onclick="setSearchFloor('all')">Todos</button>
+            <button id="tab-1" class="floor-tab" onclick="setSearchFloor(1)">Piso 1</button>
+            <button id="tab-2" class="floor-tab" onclick="setSearchFloor(2)">Piso 2</button>
+          </div>
+
+          <input type="text" id="searchInput" class="search-input" placeholder="Buscar sala, escalera escape, auditorio, baño..." oninput="filterSearch()" />
           <div id="searchResults" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
       </div>
@@ -706,7 +820,7 @@
         </div>
         <div class="modal-body">
           <div class="info-card">
-            <h3>🏫 Apertura y Cierre de Sede</h3>
+            <h3>🏫 Ingreso y Egreso de Sede</h3>
             <p>Lunes a Viernes: 07:30 a 22:45 hrs.<br>Sábados: 08:00 a 18:00 hrs.</p>
           </div>
           <div class="info-card">
@@ -738,9 +852,9 @@
             <p>Consultas de seminarios, salas asignadas y orientación general.</p>
             <a href="tel:+56225797200" class="call-btn">📲 Llamar a Central (+56 2 2579 7200)</a>
           </div>
-          <div class="info-card" style="border-left-color: #16A34A;">
+          <div class="info-card safe-card">
             <h3>🚨 Emergencias y Prevención Interna</h3>
-            <p>Anexo interno de seguridad y primeros auxilios: <strong>Anexo 4111</strong> (Portería Hall Central).</p>
+            <p>Anexo interno de seguridad, evacuación y primeros auxilios: <strong>Anexo 4111</strong> (Portería Hall Central).</p>
           </div>
         </div>
       </div>
@@ -771,60 +885,89 @@
   </main>
 
   <script>
-    // DATOS DE PISOS Y PUNTOS DE INTERÉS
+    // DATOS DE PISOS, 4 ESCALERAS DE ESCAPE, SALIDAS Y EQUIPOS DE SEGURIDAD
     const floorsData = {
       1: {
-        title: "Plano 3D — Piso 1 (Acceso y Servicios)",
-        start: { x: 0, z: 3.2, label: "Tótem Hall Central" },
+        title: "Plano 3D — Piso 1 (Acceso y Escape)",
+        start: { x: 0, z: 2.8, label: "Tótem Hall Central" },
         rooms: [
-          { id: "auditorio", name: "Auditorio Seminarios", desc: "Ala Poniente • 1 min", x: -3.2, z: -1.5, w: 3.2, d: 3.4, color: 0xE30613 },
-          { id: "biblioteca", name: "Biblioteca Central", desc: "Ala Oriente • 1 min", x: 3.2, z: -1.5, w: 3.2, d: 3.4, color: 0x2563EB },
-          { id: "dae", name: "Punto Estudiantil DAE", desc: "Costado Hall • 30 seg", x: -2.8, z: 2.2, w: 2.4, d: 2.0, color: 0x0D9488 },
-          { id: "casino", name: "Casino y Cafetería", desc: "Sector Norte • 1.5 min", x: 0, z: -3.0, w: 2.6, d: 2.0, color: 0xD97706 },
-          { id: "banos1", name: "Baños / Accesibilidad", desc: "Pasillo Oriente • 45 seg", x: 2.8, z: 2.2, w: 2.2, d: 2.0, color: 0x64748B }
+          { id: "auditorio", name: "Auditorio Seminarios", desc: "Ala Poniente • 1 min", x: -2.8, z: -1.2, w: 2.8, d: 2.8, color: 0xE30613 },
+          { id: "biblioteca", name: "Biblioteca Central", desc: "Ala Oriente • 1 min", x: 2.8, z: -1.2, w: 2.8, d: 2.8, color: 0x2563EB },
+          { id: "dae", name: "Punto Estudiantil DAE", desc: "Costado Hall • 30 seg", x: -2.5, z: 1.8, w: 2.2, d: 1.7, color: 0x0D9488 },
+          { id: "casino", name: "Casino y Cafetería", desc: "Sector Norte • 1.5 min", x: 0, z: -2.7, w: 2.4, d: 1.8, color: 0xD97706 },
+          { id: "banos1", name: "Baños / Accesibilidad", desc: "Pasillo Oriente • 45 seg", x: 2.5, z: 1.8, w: 2.0, d: 1.7, color: 0x64748B },
+          { id: "salida1", name: "Salida Emergencia Principal", desc: "Vía Escape Sur • Zona Segura", x: 0, z: 4.1, w: 2.2, d: 0.7, color: 0x16A34A }
+        ],
+        // 4 Escaleras visibles siempre en verde normativo
+        stairs: [
+          { name: "Escalera Escape 1 (Nor-Poniente)", x: -4.4, z: -3.6 },
+          { name: "Escalera Escape 2 (Nor-Oriente)", x: 4.4, z: -3.6 },
+          { name: "Escalera Escape 3 (Sur-Poniente)", x: -4.4, z: 3.6 },
+          { name: "Escalera Escape 4 (Sur-Oriente)", x: 4.4, z: 3.6 }
+        ],
+        // Rutas iluminadas al presionar "Vías de Escape"
+        escapePaths: [
+          [ [0, 2.8], [-1.3, 2.8], [-1.3, -3.6], [-4.4, -3.6] ],
+          [ [0, 2.8], [1.3, 2.8], [1.3, -3.6], [4.4, -3.6] ],
+          [ [0, 2.8], [-4.4, 3.6] ],
+          [ [0, 2.8], [4.4, 3.6] ],
+          [ [0, 2.8], [0, 4.2] ] // Salida directa
         ],
         safety: [
-          { type: "Extintor PQS", x: -1.4, z: 3.2, color: 0xDC2626 },
-          { type: "Extintor CO2", x: 1.4, z: -1.5, color: 0xDC2626 },
-          { type: "Red Húmeda", x: -1.4, z: -1.5, color: 0x0284C7 },
-          { type: "Red Seca", x: 3.8, z: 0.6, color: 0xEA580C },
-          { type: "Salida Emergencia", x: 0, z: 4.1, color: 0x16A34A }
+          { type: "Extintor PQS", x: -1.2, z: 2.8, color: 0xDC2626 },
+          { type: "Extintor CO2", x: 1.2, z: -1.5, color: 0xDC2626 },
+          { type: "Red Húmeda", x: -1.2, z: -1.5, color: 0x0284C7 },
+          { type: "Red Seca", x: 3.6, z: 0.5, color: 0xEA580C }
         ]
       },
       2: {
-        title: "Plano 3D — Piso 2 (Aulas y Laboratorios)",
-        start: { x: 0, z: 3.2, label: "Caja Escaleras / Ascensor" },
+        title: "Plano 3D — Piso 2 (Aulas y Escape)",
+        start: { x: 0, z: 2.8, label: "Hall Ascensores Piso 2" },
         rooms: [
-          { id: "lab1", name: "Lab. Computación 201", desc: "Ala Poniente • 45 seg", x: -3.2, z: -1.5, w: 3.2, d: 3.4, color: 0x7C3AED },
-          { id: "sala204", name: "Salas 202 a 206", desc: "Ala Oriente • 1 min", x: 3.2, z: -1.5, w: 3.2, d: 3.4, color: 0x2563EB },
-          { id: "docentes", name: "Sala de Profesores", desc: "Sector Sur-Poniente • 30 seg", x: -2.8, z: 2.2, w: 2.4, d: 2.0, color: 0x0D9488 },
-          { id: "sala208", name: "Taller Diseño 208", desc: "Sector Norte • 1 min", x: 0, z: -3.0, w: 2.8, d: 2.0, color: 0xE30613 },
-          { id: "banos2", name: "Baños Piso 2", desc: "Pasillo Oriente • 30 seg", x: 2.8, z: 2.2, w: 2.2, d: 2.0, color: 0x64748B }
+          { id: "lab1", name: "Lab. Computación 201", desc: "Ala Poniente • 45 seg", x: -2.8, z: -1.2, w: 2.8, d: 2.8, color: 0x7C3AED },
+          { id: "sala204", name: "Salas 202 a 206", desc: "Ala Oriente • 1 min", x: 2.8, z: -1.2, w: 2.8, d: 2.8, color: 0x2563EB },
+          { id: "docentes", name: "Sala de Profesores", desc: "Sector Sur-Poniente • 30 seg", x: -2.5, z: 1.8, w: 2.2, d: 1.7, color: 0x0D9488 },
+          { id: "sala208", name: "Taller Diseño 208", desc: "Sector Norte • 1 min", x: 0, z: -2.7, w: 2.5, d: 1.8, color: 0xE30613 },
+          { id: "banos2", name: "Baños Piso 2", desc: "Pasillo Oriente • 30 seg", x: 2.5, z: 1.8, w: 2.0, d: 1.7, color: 0x64748B },
+          { id: "escapes2", name: "4 Escaleras Evacuación", desc: "Esquinas N-S-E-O • Salida Piso 1", x: -4.4, z: 3.6, w: 1.1, d: 1.1, color: 0x16A34A }
+        ],
+        stairs: [
+          { name: "Escalera Escape 1 (Nor-Poniente)", x: -4.4, z: -3.6 },
+          { name: "Escalera Escape 2 (Nor-Oriente)", x: 4.4, z: -3.6 },
+          { name: "Escalera Escape 3 (Sur-Poniente)", x: -4.4, z: 3.6 },
+          { name: "Escalera Escape 4 (Sur-Oriente)", x: 4.4, z: 3.6 }
+        ],
+        escapePaths: [
+          [ [0, 2.8], [-1.3, 2.8], [-1.3, -3.6], [-4.4, -3.6] ],
+          [ [0, 2.8], [1.3, 2.8], [1.3, -3.6], [4.4, -3.6] ],
+          [ [0, 2.8], [-4.4, 3.6] ],
+          [ [0, 2.8], [4.4, 3.6] ]
         ],
         safety: [
-          { type: "Extintor PQS", x: -1.3, z: 3.0, color: 0xDC2626 },
-          { type: "Extintor PQS", x: 1.5, z: -2.5, color: 0xDC2626 },
-          { type: "Red Húmeda", x: 1.4, z: 1.5, color: 0x0284C7 },
-          { type: "Red Seca", x: -3.8, z: 0.5, color: 0xEA580C },
-          { type: "Vía Evacuación", x: 0, z: 4.1, color: 0x16A34A }
+          { type: "Extintor PQS", x: -1.2, z: 2.6, color: 0xDC2626 },
+          { type: "Extintor PQS", x: 1.3, z: -2.3, color: 0xDC2626 },
+          { type: "Red Húmeda", x: 1.2, z: 1.4, color: 0x0284C7 },
+          { type: "Red Seca", x: -3.6, z: 0.4, color: 0xEA580C }
         ]
       }
     };
 
     // VARIABLES THREE.JS
-    let scene, camera, renderer, buildingGroup, safetyGroup, routeLine;
+    let scene, camera, renderer, buildingGroup, safetyGroup, escapeGroup, routeLine;
     let currentFloor = 1;
     let safetyVisible = false;
+    let escapeVisible = false;
+    let selectedSearchFloor = 'all';
     let isDragging = false;
     let prevX = 0, prevY = 0;
-    let targetRotY = -0.45, targetRotX = 0.55;
+    let targetRotY = -0.45, targetRotX = 0.58;
 
     function init3D() {
       const container = document.getElementById('three-container');
       scene = new THREE.Scene();
 
       camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 100);
-      camera.position.set(0, 9.5, 11.5);
+      camera.position.set(0, 10.2, 12.2);
       camera.lookAt(0, 0, 0);
 
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -833,7 +976,7 @@
       container.innerHTML = '';
       container.appendChild(renderer.domElement);
 
-      const ambient = new THREE.AmbientLight(0xffffff, 0.75);
+      const ambient = new THREE.AmbientLight(0xffffff, 0.78);
       scene.add(ambient);
 
       const dirLight = new THREE.DirectionalLight(0xffffff, 0.65);
@@ -843,7 +986,6 @@
       buildingGroup = new THREE.Group();
       scene.add(buildingGroup);
 
-      // Controles táctiles y mouse para rotar maqueta
       const dom = renderer.domElement;
       dom.addEventListener('pointerdown', (e) => {
         isDragging = true;
@@ -856,7 +998,7 @@
         const dx = e.clientX - prevX;
         const dy = e.clientY - prevY;
         targetRotY += dx * 0.012;
-        targetRotX = Math.max(0.2, Math.min(1.1, targetRotX + dy * 0.01));
+        targetRotX = Math.max(0.2, Math.min(1.15, targetRotX + dy * 0.01));
         prevX = e.clientX;
         prevY = e.clientY;
       });
@@ -873,13 +1015,12 @@
       const data = floorsData[floorNum];
 
       // Losa base del piso
-      const baseGeo = new THREE.BoxGeometry(10.5, 0.25, 9.2);
+      const baseGeo = new THREE.BoxGeometry(10.6, 0.25, 9.2);
       const baseMat = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
       const baseMesh = new THREE.Mesh(baseGeo, baseMat);
       baseMesh.position.y = -0.15;
       buildingGroup.add(baseMesh);
 
-      // Borde rojo institucional de la losa
       const edges = new THREE.EdgesGeometry(baseGeo);
       const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x94A3B8 }));
       line.position.y = -0.15;
@@ -887,16 +1028,30 @@
 
       // Salas / Zonas en 3D
       data.rooms.forEach(room => {
-        const geo = new THREE.BoxGeometry(room.w, 0.85, room.d);
+        const geo = new THREE.BoxGeometry(room.w, 0.82, room.d);
         const mat = new THREE.MeshLambertMaterial({ color: room.color, transparent: true, opacity: 0.85 });
         const mesh = new THREE.Mesh(geo, mat);
-        mesh.position.set(room.x, 0.42, room.z);
+        mesh.position.set(room.x, 0.41, room.z);
         buildingGroup.add(mesh);
 
         const rEdges = new THREE.EdgesGeometry(geo);
         const rLine = new THREE.LineSegments(rEdges, new THREE.LineBasicMaterial({ color: 0x1E293B }));
         rLine.position.copy(mesh.position);
         buildingGroup.add(rLine);
+      });
+
+      // 4 ESCALERAS DE EVACUACIÓN VISIBLES DESDE EL INICIO (Bloques verdes con peldaños)
+      data.stairs.forEach(st => {
+        const stairGroup = new THREE.Group();
+        for (let step = 0; step < 3; step++) {
+          const sGeo = new THREE.BoxGeometry(1.05, 0.35 + step * 0.28, 0.35);
+          const sMat = new THREE.MeshLambertMaterial({ color: 0x16A34A });
+          const sMesh = new THREE.Mesh(sGeo, sMat);
+          sMesh.position.set(0, (0.35 + step * 0.28) / 2, (step - 1) * 0.32);
+          stairGroup.add(sMesh);
+        }
+        stairGroup.position.set(st.x, 0, st.z);
+        buildingGroup.add(stairGroup);
       });
 
       // Pin "Estás Aquí"
@@ -906,7 +1061,20 @@
       pin.position.set(data.start.x, 0.55, data.start.z);
       buildingGroup.add(pin);
 
-      // Grupo de Seguridad (Extintores, Red Húmeda, Red Seca, Evacuación)
+      // Grupo de Vías de Escape (Rutas verdes hacia las 4 escaleras + salida)
+      escapeGroup = new THREE.Group();
+      data.escapePaths.forEach(pathCoords => {
+        const pts = pathCoords.map(p => new THREE.Vector3(p[0], 0.14, p[1]));
+        const curve = new THREE.CatmullRomCurve3(pts);
+        const tubeGeo = new THREE.TubeGeometry(curve, 24, 0.1, 8, false);
+        const tubeMat = new THREE.MeshBasicMaterial({ color: 0x16A34A });
+        const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
+        escapeGroup.add(tubeMesh);
+      });
+      escapeGroup.visible = escapeVisible;
+      buildingGroup.add(escapeGroup);
+
+      // Grupo de Equipos de Seguridad (Extintores, Red Húmeda, Red Seca)
       safetyGroup = new THREE.Group();
       data.safety.forEach(item => {
         const sGeo = new THREE.SphereGeometry(0.24, 16, 16);
@@ -924,9 +1092,9 @@
       const start = floorsData[currentFloor].start;
 
       const points = [
-        new THREE.Vector3(start.x, 0.15, start.z),
-        new THREE.Vector3(0, 0.15, room.z),
-        new THREE.Vector3(room.x, 0.15, room.z)
+        new THREE.Vector3(start.x, 0.16, start.z),
+        new THREE.Vector3(0, 0.16, room.z),
+        new THREE.Vector3(room.x, 0.16, room.z)
       ];
 
       const curve = new THREE.CatmullRomCurve3(points);
@@ -952,7 +1120,7 @@
       currentFloor = floorNum;
       const data = floorsData[floorNum];
       document.getElementById('floorTitle').textContent = data.title;
-      document.getElementById('routeBanner').textContent = `📍 Origen: ${data.start.label}. Toca un destino para ver la ruta 3D.`;
+      document.getElementById('routeBanner').textContent = `📍 Origen: ${data.start.label}. Las 4 escaleras de escape están marcadas en verde.`;
 
       const poiList = document.getElementById('poiList');
       poiList.innerHTML = '';
@@ -964,7 +1132,7 @@
         btn.onclick = () => {
           document.querySelectorAll('.poi-card').forEach(c => c.classList.remove('selected'));
           btn.classList.add('selected');
-          document.getElementById('routeBanner').innerHTML = `🧭 Ruta trazada hacia <strong>${room.name}</strong> (${room.desc})`;
+          document.getElementById('routeBanner').innerHTML = `🧭 Ruta hacia <strong>${room.name}</strong> (${room.desc})`;
           drawRouteTo(room);
         };
         poiList.appendChild(btn);
@@ -987,6 +1155,22 @@
       }, 60);
     }
 
+    function toggleEscapeRoutes() {
+      escapeVisible = !escapeVisible;
+      if (escapeGroup) escapeGroup.visible = escapeVisible;
+      const btn = document.getElementById('escapeBtn');
+      const banner = document.getElementById('escapeBanner');
+      if (escapeVisible) {
+        btn.classList.add('on');
+        document.getElementById('escapeBtnText').textContent = 'Vías Activas ✓';
+        banner.classList.add('visible');
+      } else {
+        btn.classList.remove('on');
+        document.getElementById('escapeBtnText').textContent = 'Vías de Escape';
+        banner.classList.remove('visible');
+      }
+    }
+
     function toggleSafetyLayer() {
       safetyVisible = !safetyVisible;
       if (safetyGroup) safetyGroup.visible = safetyVisible;
@@ -994,31 +1178,58 @@
       const legend = document.getElementById('safetyLegend');
       if (safetyVisible) {
         btn.classList.add('on');
-        document.getElementById('safetyBtnText').textContent = 'Seguridad Activa ✓';
+        document.getElementById('safetyBtnText').textContent = 'Equipos Activos ✓';
         legend.classList.add('visible');
       } else {
         btn.classList.remove('on');
-        document.getElementById('safetyBtnText').textContent = 'Ver Extintores y Redes';
+        document.getElementById('safetyBtnText').textContent = 'Extintores y Redes';
         legend.classList.remove('visible');
       }
     }
 
-    // BUSCADOR GLOBAL
+    // BUSCADOR SEGMENTADO POR PISO
+    function setSearchFloor(floor) {
+      selectedSearchFloor = floor;
+      document.querySelectorAll('.floor-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(`tab-${floor}`).classList.add('active');
+      filterSearch();
+    }
+
     function filterSearch() {
       const q = document.getElementById('searchInput').value.toLowerCase();
       const container = document.getElementById('searchResults');
       container.innerHTML = '';
 
-      [1, 2].forEach(floor => {
+      const floorsToScan = selectedSearchFloor === 'all' ? [1, 2] : [selectedSearchFloor];
+
+      floorsToScan.forEach(floor => {
+        // Espacios y Salidas
         floorsData[floor].rooms.forEach(room => {
           if (room.name.toLowerCase().includes(q) || room.desc.toLowerCase().includes(q)) {
             const card = document.createElement('div');
-            card.className = 'info-card';
+            card.className = 'info-card' + (room.id.includes('salida') || room.id.includes('escape') ? ' safe-card' : '');
             card.style.cursor = 'pointer';
-            card.innerHTML = `<h3>${room.name} (Piso ${floor})</h3><p>${room.desc} — Toca para abrir en el plano 3D ➔</p>`;
+            card.innerHTML = `<h3>${room.name} • Piso ${floor}</h3><p>${room.desc} — Toca para ver en plano 3D ➔</p>`;
             card.onclick = () => {
               closeModal('searchModal');
               openFloorModal(floor, room.id);
+            };
+            container.appendChild(card);
+          }
+        });
+
+        // Escaleras de escape del piso
+        floorsData[floor].stairs.forEach(st => {
+          if (st.name.toLowerCase().includes(q) || 'escalera'.includes(q) || 'escape'.includes(q)) {
+            const card = document.createElement('div');
+            card.className = 'info-card safe-card';
+            card.style.cursor = 'pointer';
+            card.innerHTML = `<h3>🏃 ${st.name} • Piso ${floor}</h3><p>Vía de evacuación normativa — Ver en plano 3D ➔</p>`;
+            card.onclick = () => {
+              closeModal('searchModal');
+              escapeVisible = false;
+              openFloorModal(floor);
+              setTimeout(() => toggleEscapeRoutes(), 140);
             };
             container.appendChild(card);
           }
@@ -1030,7 +1241,7 @@
       document.getElementById(id).classList.add('active');
       if (id === 'searchModal') {
         document.getElementById('searchInput').value = '';
-        filterSearch();
+        setSearchFloor('all');
       }
     }
 
