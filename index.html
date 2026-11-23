@@ -78,7 +78,7 @@
     .header {
       position: relative;
       z-index: 2;
-      padding: 3vh 5% 1.2vh;
+      padding: 2.6vh 5% 1vh;
       text-align: center;
       background: linear-gradient(180deg, #FFFFFF 78%, rgba(255,255,255,0) 100%);
     }
@@ -88,14 +88,14 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-bottom: 0.8vh;
+      margin-bottom: 0.7vh;
     }
 
     .brand-logo {
       background: var(--red-inacap);
       color: #FFF;
       font-weight: 900;
-      font-size: clamp(18px, 2.7vh, 25px);
+      font-size: clamp(18px, 2.6vh, 24px);
       letter-spacing: 1.5px;
       padding: 4px 14px;
       border-radius: 6px;
@@ -105,7 +105,7 @@
     .pilot-tag {
       background: var(--dark);
       color: #FFF;
-      font-size: clamp(9px, 1.2vh, 11px);
+      font-size: clamp(9px, 1.15vh, 11px);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
@@ -114,7 +114,7 @@
     }
 
     .header h1 {
-      font-size: clamp(14px, 2.05vh, 19px);
+      font-size: clamp(14px, 2vh, 18.5px);
       font-weight: 800;
       color: var(--dark);
       line-height: 1.2;
@@ -122,16 +122,16 @@
     }
 
     .location-pill {
-      margin-top: 0.9vh;
+      margin-top: 0.8vh;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       background: #FFF1F2;
       border: 1px solid #FECDD3;
       color: var(--red-dark);
-      font-size: clamp(10px, 1.3vh, 12.5px);
+      font-size: clamp(10px, 1.25vh, 12px);
       font-weight: 700;
-      padding: 5px 12px;
+      padding: 4px 12px;
       border-radius: 999px;
     }
 
@@ -151,7 +151,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1.4vh;
+      gap: 1.2vh;
       padding: 0 6%;
     }
 
@@ -160,14 +160,14 @@
       width: 100%;
       background: #FFFFFF;
       border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 1.55vh 15px;
+      border-radius: 15px;
+      padding: 1.35vh 14px;
       display: flex;
       align-items: center;
-      gap: 13px;
+      gap: 12px;
       text-align: left;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.05);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
@@ -182,15 +182,34 @@
       box-shadow: 0 8px 20px rgba(227, 6, 19, 0.28);
     }
 
+    .menu-btn.voice-guide {
+      background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+      border: 1.5px solid #86EFAC;
+      box-shadow: 0 6px 16px rgba(22, 163, 74, 0.14);
+    }
+
+    .menu-btn.voice-guide .btn-icon {
+      background: var(--safe-green);
+      color: #FFFFFF;
+    }
+
+    .menu-btn.voice-guide .btn-title {
+      color: #14532D;
+    }
+
+    .menu-btn.voice-guide .btn-sub {
+      color: #166534;
+    }
+
     .btn-icon {
-      width: clamp(38px, 5vh, 46px);
-      height: clamp(38px, 5vh, 46px);
-      border-radius: 12px;
+      width: clamp(36px, 4.6vh, 44px);
+      height: clamp(36px, 4.6vh, 44px);
+      border-radius: 11px;
       background: var(--gray-light);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: clamp(18px, 2.4vh, 23px);
+      font-size: clamp(17px, 2.3vh, 22px);
       flex-shrink: 0;
     }
 
@@ -204,7 +223,7 @@
     }
 
     .btn-title {
-      font-size: clamp(13px, 1.8vh, 16.5px);
+      font-size: clamp(12.5px, 1.7vh, 16px);
       font-weight: 800;
       color: var(--dark);
       display: block;
@@ -216,7 +235,7 @@
     }
 
     .btn-sub {
-      font-size: clamp(10px, 1.3vh, 12px);
+      font-size: clamp(10px, 1.25vh, 11.8px);
       color: var(--gray-text);
       display: block;
       margin-top: 2px;
@@ -231,7 +250,7 @@
 
     /* Mano táctil pulsante obligatoria */
     .touch-hand {
-      font-size: clamp(16px, 2.2vh, 20px);
+      font-size: clamp(15px, 2.1vh, 19px);
       opacity: 0.85;
       animation: tapHint 1.8s infinite ease-in-out;
       flex-shrink: 0;
@@ -245,10 +264,10 @@
     }
 
     .btn-row .menu-btn {
-      padding: 1.45vh 12px;
+      padding: 1.25vh 12px;
       flex-direction: column;
       align-items: flex-start;
-      gap: 6px;
+      gap: 5px;
     }
 
     .btn-row .btn-top {
@@ -264,7 +283,7 @@
       z-index: 2;
       background: var(--dark);
       color: #FFFFFF;
-      padding: 1.75vh 6%;
+      padding: 1.6vh 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -279,7 +298,7 @@
     }
 
     .footer-label {
-      font-size: clamp(9px, 1.15vh, 11px);
+      font-size: clamp(9px, 1.1vh, 10.5px);
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: #FCA5A5;
@@ -287,7 +306,7 @@
     }
 
     .footer-address {
-      font-size: clamp(11px, 1.5vh, 14px);
+      font-size: clamp(11px, 1.45vh, 13.5px);
       font-weight: 700;
       color: #FFFFFF;
       margin-top: 2px;
@@ -299,9 +318,9 @@
     .footer-cta {
       background: var(--red-inacap);
       color: #FFF;
-      padding: 8px 12px;
+      padding: 7px 11px;
       border-radius: 10px;
-      font-size: clamp(10px, 1.35vh, 12px);
+      font-size: clamp(10px, 1.3vh, 12px);
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -548,7 +567,7 @@
       color: var(--gray-text);
     }
 
-    /* BUSCADOR POR PISO */
+    /* BUSCADOR POR PISO Y OTROS MODALES */
     .modal-body {
       padding: 15px 16px;
       overflow-y: auto;
@@ -620,7 +639,65 @@
     .info-card p {
       font-size: 12px;
       color: var(--gray-text);
-      line-height: 1.35;
+      line-height: 1.38;
+    }
+
+    /* ESTILOS GUÍA DE VOZ EMERGENCIA */
+    .voice-box {
+      background: linear-gradient(135deg, #14532D 0%, #166534 100%);
+      color: #FFFFFF;
+      border-radius: 16px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.22);
+    }
+
+    .voice-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #BBF7D0;
+    }
+
+    .voice-quote {
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .voice-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .voice-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 9px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .voice-btn.play {
+      background: #FFFFFF;
+      color: #14532D;
+    }
+
+    .voice-btn.stop {
+      background: rgba(255,255,255,0.16);
+      color: #FFFFFF;
     }
 
     .call-btn {
@@ -676,7 +753,7 @@
         <div class="btn-icon">🏢</div>
         <div class="btn-text">
           <span class="btn-title">Piso 1 — Acceso y Vías de Escape</span>
-          <span class="btn-sub">4 Escaleras, Salida Segura, Auditorio, DAE y Extintores</span>
+          <span class="btn-sub">4 Escaleras, Salida Segura, Auditorio y Extintores</span>
         </div>
         <span class="touch-hand">👆</span>
       </button>
@@ -695,6 +772,16 @@
         <div class="btn-text">
           <span class="btn-title">¿A dónde vas? Buscador por Piso</span>
           <span class="btn-sub">Filtra Piso 1 o Piso 2: salas, salidas y seguridad</span>
+        </div>
+        <span class="touch-hand">👆</span>
+      </button>
+
+      <!-- NUEVO BOTÓN: ASISTENTE CON VOZ DE BIENVENIDA Y EMERGENCIA -->
+      <button class="menu-btn voice-guide" onclick="openEmergencyVoice()">
+        <div class="btn-icon">🔊</div>
+        <div class="btn-text">
+          <span class="btn-title">Guía de Bienvenida y Emergencia</span>
+          <span class="btn-sub">Audio-guía preventiva: qué hacer en sismo o incendio</span>
         </div>
         <span class="touch-hand">👆</span>
       </button>
@@ -767,7 +854,6 @@
             📍 Toca un destino abajo para trazar la ruta en 3D desde el punto de inicio.
           </div>
 
-          <!-- PANEL INFORMATIVO VÍAS DE ESCAPE -->
           <div id="escapeBanner" class="escape-banner">
             <strong>🏃 Plan de Evacuación Activo (4 Escaleras + Salida):</strong><br>
             • <strong>Escaleras 1 y 2 (Sector Norte):</strong> Evacúan hacia Patio Zona Segura.<br>
@@ -775,7 +861,6 @@
             <em>Siga las flechas verdes iluminadas en el plano 3D.</em>
           </div>
 
-          <!-- LEYENDA EXTINTORES Y REDES -->
           <div id="safetyLegend" class="safety-legend">
             <strong>Equipos Contra Incendio (Normativa Vigente):</strong>
             <div class="legend-items">
@@ -798,7 +883,6 @@
           <button class="close-btn" onclick="closeModal('searchModal')">✕</button>
         </div>
         <div class="modal-body">
-          <!-- TABS POR PISO -->
           <div class="floor-tabs">
             <button id="tab-all" class="floor-tab active" onclick="setSearchFloor('all')">Todos</button>
             <button id="tab-1" class="floor-tab" onclick="setSearchFloor(1)">Piso 1</button>
@@ -807,6 +891,46 @@
 
           <input type="text" id="searchInput" class="search-input" placeholder="Buscar sala, escalera escape, auditorio, baño..." oninput="filterSearch()" />
           <div id="searchResults" style="display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL NUEVO: GUÍA DE BIENVENIDA Y EMERGENCIA CON VOZ -->
+    <div id="voiceModal" class="modal-overlay">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2>🔊 Bienvenida y Protocolo de Emergencia</h2>
+          <button class="close-btn" onclick="closeEmergencyVoice()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="voice-box">
+            <div class="voice-status">
+              <span id="voiceStateLabel">🎙️ Reproduciendo guía preventiva...</span>
+              <span>INACAP Seguridad</span>
+            </div>
+            <p class="voice-quote" id="voiceScriptText">
+              "Hola, bienvenido al sistema de orientación y seguridad de INACAP. Por tu bienestar, recuerda: en caso de sismo o incendio, conserva la calma, no uses los ascensores y baja siempre por las escaleras habilitadas. Sigue las vías de evacuación señalizadas en verde, mantén la vista al frente sin mirar el suelo ni el celular, y dirígete a la Zona Segura más cercana."
+            </p>
+            <div class="voice-actions">
+              <button class="voice-btn play" onclick="speakEmergencyMessage()">🔊 Escuchar de nuevo</button>
+              <button class="voice-btn stop" onclick="stopEmergencySpeech()">⏹️ Detener voz</button>
+            </div>
+          </div>
+
+          <div class="info-card safe-card">
+            <h3>1. Conserva la calma y no uses ascensores</h3>
+            <p>Ante cualquier alarma de incendio o movimiento sísmico, utiliza exclusivamente las 4 cajas de escaleras de emergencia.</p>
+          </div>
+
+          <div class="info-card safe-card">
+            <h3>2. Vista al frente, sin mirar el suelo ni el celular</h3>
+            <p>Camina a paso firme sin correr, afirmándote del pasamanos y manteniendo la atención hacia adelante.</p>
+          </div>
+
+          <div class="info-card safe-card">
+            <h3>3. Dirígete a las Vías de Escape señalizadas</h3>
+            <p>Sigue la señalética verde hacia las salidas habilitadas y permanece en la Zona Segura hasta recibir instrucciones de los monitores.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -898,20 +1022,18 @@
           { id: "banos1", name: "Baños / Accesibilidad", desc: "Pasillo Oriente • 45 seg", x: 2.5, z: 1.8, w: 2.0, d: 1.7, color: 0x64748B },
           { id: "salida1", name: "Salida Emergencia Principal", desc: "Vía Escape Sur • Zona Segura", x: 0, z: 4.1, w: 2.2, d: 0.7, color: 0x16A34A }
         ],
-        // 4 Escaleras visibles siempre en verde normativo
         stairs: [
           { name: "Escalera Escape 1 (Nor-Poniente)", x: -4.4, z: -3.6 },
           { name: "Escalera Escape 2 (Nor-Oriente)", x: 4.4, z: -3.6 },
           { name: "Escalera Escape 3 (Sur-Poniente)", x: -4.4, z: 3.6 },
           { name: "Escalera Escape 4 (Sur-Oriente)", x: 4.4, z: 3.6 }
         ],
-        // Rutas iluminadas al presionar "Vías de Escape"
         escapePaths: [
           [ [0, 2.8], [-1.3, 2.8], [-1.3, -3.6], [-4.4, -3.6] ],
           [ [0, 2.8], [1.3, 2.8], [1.3, -3.6], [4.4, -3.6] ],
           [ [0, 2.8], [-4.4, 3.6] ],
           [ [0, 2.8], [4.4, 3.6] ],
-          [ [0, 2.8], [0, 4.2] ] // Salida directa
+          [ [0, 2.8], [0, 4.2] ]
         ],
         safety: [
           { type: "Extintor PQS", x: -1.2, z: 2.8, color: 0xDC2626 },
@@ -1014,7 +1136,6 @@
 
       const data = floorsData[floorNum];
 
-      // Losa base del piso
       const baseGeo = new THREE.BoxGeometry(10.6, 0.25, 9.2);
       const baseMat = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
       const baseMesh = new THREE.Mesh(baseGeo, baseMat);
@@ -1026,7 +1147,6 @@
       line.position.y = -0.15;
       buildingGroup.add(line);
 
-      // Salas / Zonas en 3D
       data.rooms.forEach(room => {
         const geo = new THREE.BoxGeometry(room.w, 0.82, room.d);
         const mat = new THREE.MeshLambertMaterial({ color: room.color, transparent: true, opacity: 0.85 });
@@ -1040,7 +1160,6 @@
         buildingGroup.add(rLine);
       });
 
-      // 4 ESCALERAS DE EVACUACIÓN VISIBLES DESDE EL INICIO (Bloques verdes con peldaños)
       data.stairs.forEach(st => {
         const stairGroup = new THREE.Group();
         for (let step = 0; step < 3; step++) {
@@ -1054,14 +1173,12 @@
         buildingGroup.add(stairGroup);
       });
 
-      // Pin "Estás Aquí"
       const pinGeo = new THREE.CylinderGeometry(0.28, 0.05, 0.9, 16);
       const pinMat = new THREE.MeshLambertMaterial({ color: 0xE30613 });
       const pin = new THREE.Mesh(pinGeo, pinMat);
       pin.position.set(data.start.x, 0.55, data.start.z);
       buildingGroup.add(pin);
 
-      // Grupo de Vías de Escape (Rutas verdes hacia las 4 escaleras + salida)
       escapeGroup = new THREE.Group();
       data.escapePaths.forEach(pathCoords => {
         const pts = pathCoords.map(p => new THREE.Vector3(p[0], 0.14, p[1]));
@@ -1074,7 +1191,6 @@
       escapeGroup.visible = escapeVisible;
       buildingGroup.add(escapeGroup);
 
-      // Grupo de Equipos de Seguridad (Extintores, Red Húmeda, Red Seca)
       safetyGroup = new THREE.Group();
       data.safety.forEach(item => {
         const sGeo = new THREE.SphereGeometry(0.24, 16, 16);
@@ -1187,6 +1303,51 @@
       }
     }
 
+    // GUÍA DE BIENVENIDA Y EMERGENCIA CON VOZ AMABLE
+    const emergencyMessage = "Hola, bienvenido al sistema de orientación y seguridad de INACAP. Por tu bienestar, recuerda: en caso de sismo o incendio, conserva la calma, no uses los ascensores y baja siempre por las escaleras habilitadas. Sigue las vías de evacuación señalizadas en verde, mantén la vista al frente sin mirar el suelo ni el celular, y dirígete a la Zona Segura más cercana.";
+
+    function openEmergencyVoice() {
+      openModal('voiceModal');
+      speakEmergencyMessage();
+    }
+
+    function closeEmergencyVoice() {
+      stopEmergencySpeech();
+      closeModal('voiceModal');
+    }
+
+    function speakEmergencyMessage() {
+      if (!('speechSynthesis' in window)) {
+        document.getElementById('voiceStateLabel').textContent = "📋 Protocolo preventivo";
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(emergencyMessage);
+      utterance.lang = 'es-CL';
+      utterance.rate = 0.96;  // Ritmo pausado, amable y claro
+      utterance.pitch = 1.05; // Tono cálido
+
+      const voices = window.speechSynthesis.getVoices();
+      const spanishVoice = voices.find(v => v.lang.includes('es') && (v.name.includes('Google') || v.name.includes('Sabina') || v.name.includes('Helena') || v.name.includes('Paulina')));
+      if (spanishVoice) utterance.voice = spanishVoice;
+
+      utterance.onstart = () => {
+        document.getElementById('voiceStateLabel').textContent = "🎙️ Reproduciendo guía preventiva...";
+      };
+      utterance.onend = () => {
+        document.getElementById('voiceStateLabel').textContent = "✅ Mensaje finalizado";
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function stopEmergencySpeech() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      document.getElementById('voiceStateLabel').textContent = "⏹️ Audio detenido";
+    }
+
     // BUSCADOR SEGMENTADO POR PISO
     function setSearchFloor(floor) {
       selectedSearchFloor = floor;
@@ -1203,7 +1364,6 @@
       const floorsToScan = selectedSearchFloor === 'all' ? [1, 2] : [selectedSearchFloor];
 
       floorsToScan.forEach(floor => {
-        // Espacios y Salidas
         floorsData[floor].rooms.forEach(room => {
           if (room.name.toLowerCase().includes(q) || room.desc.toLowerCase().includes(q)) {
             const card = document.createElement('div');
@@ -1218,7 +1378,6 @@
           }
         });
 
-        // Escaleras de escape del piso
         floorsData[floor].stairs.forEach(st => {
           if (st.name.toLowerCase().includes(q) || 'escalera'.includes(q) || 'escape'.includes(q)) {
             const card = document.createElement('div');
