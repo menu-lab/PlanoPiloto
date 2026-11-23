@@ -118,7 +118,6 @@
       line-height: 1.2;
     }
 
-    /* Selector dinámico de ubicación actual (QR o Acceso Directo) */
     .location-selector {
       margin-top: 0.7vh;
       display: inline-flex;
@@ -687,7 +686,7 @@
     .voice-btn.play { background: #FFFFFF; color: #14532D; }
     .voice-btn.stop { background: rgba(255,255,255,0.16); color: #FFFFFF; }
 
-    /* FILTRO ANTI-BROMA EMERGENCIA */
+    /* FILTRO ANTI-BROMA EMERGENCIA (5 SEGUNDOS) */
     .step-label {
       font-size: 12px;
       font-weight: 800;
@@ -723,7 +722,7 @@
     .hold-container {
       position: relative;
       width: 100%;
-      height: 52px;
+      height: 54px;
       background: #FEE2E2;
       border: 2px solid var(--red-inacap);
       border-radius: 14px;
@@ -749,7 +748,7 @@
     .hold-text {
       position: relative;
       z-index: 2;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 900;
       color: var(--red-dark);
       pointer-events: none;
@@ -890,7 +889,7 @@
       </div>
     </footer>
 
-    <!-- MODAL SELECTOR DE PUNTO ACTUAL (SOLUCIONA ACCESO DIRECTO GUARDADO) -->
+    <!-- MODAL SELECTOR DE PUNTO ACTUAL -->
     <div id="whereModal" class="modal-overlay">
       <div class="modal-sheet" style="height: 62%;">
         <div class="modal-header">
@@ -1026,7 +1025,7 @@
       </div>
     </div>
 
-    <!-- MODAL 4: ASISTENCIA MÉDICA O EMERGENCIA CON DOBLE FILTRO ANTI-BROMA -->
+    <!-- MODAL 4: ASISTENCIA MÉDICA O EMERGENCIA CON DOBLE FILTRO ANTI-BROMA (5 SEGUNDOS) -->
     <div id="sosModal" class="modal-overlay">
       <div class="modal-sheet">
         <div class="modal-header">
@@ -1036,7 +1035,7 @@
         <div class="modal-body">
           <div class="info-card" style="border-left-color: var(--amber-alert); background:#FFFBEB;">
             <h3>⚠️ Uso Responsable y Trazabilidad</h3>
-            <p>Para evitar activaciones accidentales, confirma tu ubicación y mantén presionado el botón de enlace por 2 segundos.</p>
+            <p>Para evitar activaciones accidentales, confirma tu ubicación y mantén presionado el botón de enlace durante 5 segundos.</p>
           </div>
 
           <div>
@@ -1058,11 +1057,11 @@
           </div>
 
           <div>
-            <span class="step-label">3. Mantén presionado 2 segundos para contactar Guardia / Enfermería:</span>
+            <span class="step-label">3. Mantén presionado 5 segundos para contactar Guardia / Enfermería:</span>
             <div id="holdBtn" class="hold-container"
                  onpointerdown="startHold()" onpointerup="cancelHold()" onpointerleave="cancelHold()">
               <div id="holdProgress" class="hold-progress"></div>
-              <span id="holdText" class="hold-text">🛡️ MANTENER PRESIONADO (2s)</span>
+              <span id="holdText" class="hold-text">🛡️ MANTENER PRESIONADO (5s)</span>
             </div>
           </div>
 
@@ -1247,19 +1246,16 @@
       canvas.width = isHero ? 512 : 340;
       canvas.height = isHero ? 128 : 92;
 
-      // Fondo redondeado
       const r = 24;
       ctx.fillStyle = bgColor;
       ctx.beginPath();
       ctx.roundRect(8, 8, canvas.width - 16, canvas.height - 16, r);
       ctx.fill();
 
-      // Borde blanco de alto contraste
       ctx.lineWidth = isHero ? 8 : 5;
       ctx.strokeStyle = "#FFFFFF";
       ctx.stroke();
 
-      // Texto
       ctx.fillStyle = textColor;
       ctx.font = `900 ${isHero ? 38 : 30}px Inter, Arial, sans-serif`;
       ctx.textAlign = 'center';
@@ -1343,7 +1339,6 @@
       const data = floorsData[floorNum];
       const startPos = getActiveStart(floorNum);
 
-      // Losa base del piso
       const baseGeo = new THREE.BoxGeometry(10.6, 0.25, 9.2);
       const baseMat = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
       const baseMesh = new THREE.Mesh(baseGeo, baseMat);
@@ -1355,7 +1350,6 @@
       line.position.y = -0.15;
       buildingGroup.add(line);
 
-      // Salas / Zonas en 3D + Etiqueta Flotante con Nombre
       data.rooms.forEach(room => {
         const geo = new THREE.BoxGeometry(room.w, 0.82, room.d);
         const mat = new THREE.MeshLambertMaterial({ color: room.color, transparent: true, opacity: 0.85 });
@@ -1368,14 +1362,12 @@
         rLine.position.copy(mesh.position);
         buildingGroup.add(rLine);
 
-        // Etiqueta legible sobre cada sector
         const bgHex = room.id === 'salida1' ? '#16A34A' : '#1E293B';
         const labelSprite = createTextSprite(room.name, bgHex, '#FFFFFF', false);
         labelSprite.position.set(room.x, 1.25, room.z);
         buildingGroup.add(labelSprite);
       });
 
-      // 4 Escaleras de Evacuación en verde
       data.stairs.forEach((st, idx) => {
         const stairGroup = new THREE.Group();
         for (let step = 0; step < 3; step++) {
@@ -1394,7 +1386,6 @@
         buildingGroup.add(stLabel);
       });
 
-      // Pin + CARTEL CLARO "USTED ESTÁ AQUÍ"
       const pinGeo = new THREE.CylinderGeometry(0.28, 0.05, 0.9, 16);
       const pinMat = new THREE.MeshLambertMaterial({ color: 0xE30613 });
       const pin = new THREE.Mesh(pinGeo, pinMat);
@@ -1405,7 +1396,6 @@
       hereBanner.position.set(startPos.x, 1.75, startPos.z);
       buildingGroup.add(hereBanner);
 
-      // Vías de Escape
       escapeGroup = new THREE.Group();
       data.escapePaths.forEach(pathCoords => {
         const pts = pathCoords.map(p => new THREE.Vector3(p[0], 0.14, p[1]));
@@ -1417,7 +1407,6 @@
       escapeGroup.visible = escapeVisible;
       buildingGroup.add(escapeGroup);
 
-      // Equipos de Seguridad
       safetyGroup = new THREE.Group();
       data.safety.forEach(item => {
         const sGeo = new THREE.SphereGeometry(0.25, 16, 16);
@@ -1571,16 +1560,17 @@
       document.getElementById('voiceStateLabel').textContent = "⏹️ Audio detenido";
     }
 
-    // SOS CON DOBLE FILTRO ANTI-BROMA Y ANTI-BOLSILLO
+    // SOS CON DOBLE FILTRO ANTI-BROMA Y ANTI-BOLSILLO (5 SEGUNDOS)
     let sosLoc = 'Piso 1 - Hall/Biblioteca';
     let sosType = 'Urgencia Médica / Accidente';
     let holdTimer = null;
     let holdStart = 0;
+    const HOLD_DURATION = 5000;
 
     function openSosModal() {
       document.getElementById('sosUnlockedBox').style.display = 'none';
       document.getElementById('holdProgress').style.width = '0%';
-      document.getElementById('holdText').textContent = '🛡️ MANTENER PRESIONADO (2s)';
+      document.getElementById('holdText').textContent = '🛡️ MANTENER PRESIONADO (5s)';
       document.getElementById('holdBtn').classList.remove('holding');
       openModal('sosModal');
     }
@@ -1608,15 +1598,19 @@
 
       holdTimer = setInterval(() => {
         const elapsed = Date.now() - holdStart;
-        const pct = Math.min(100, (elapsed / 2000) * 100);
+        const pct = Math.min(100, (elapsed / HOLD_DURATION) * 100);
+        const remaining = Math.ceil((HOLD_DURATION - elapsed) / 1000);
         bar.style.width = pct + '%';
-        if (pct >= 100) {
+
+        if (pct < 100) {
+          txt.textContent = `⏳ MANTÉN PRESIONADO... (${remaining}s)`;
+        } else {
           clearInterval(holdTimer);
           txt.textContent = '✅ CANALES DE EMERGENCIA HABILITADOS';
           updateSosWhatsapp();
           document.getElementById('sosUnlockedBox').style.display = 'flex';
         }
-      }, 40);
+      }, 50);
     }
 
     function cancelHold() {
@@ -1624,6 +1618,7 @@
       const bar = document.getElementById('holdProgress');
       if (parseFloat(bar.style.width) < 100) {
         bar.style.width = '0%';
+        document.getElementById('holdText').textContent = '🛡️ MANTENER PRESIONADO (5s)';
         document.getElementById('holdBtn').classList.remove('holding');
       }
     }
