@@ -1,1 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>INACAP | Directorio Interactivo & Seguridad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Three.js para maqueta 3D táctil -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root {
+      --red-inacap: #E30613;
+      --red-dark: #B5040E;
+      --dark: #1A1A1A;
+      --gray-text: #555555;
+      --gray-light: #F4F5F7;
+      --border: #E2E5E9;
+      --safe-green: #16A34A;
+      --hydrant-blue: #0284C7;
+      --dry-orange: #EA580C;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
+      background-color: #E5E7EB;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Lienzo base proporcional 900x1700 en pantalla única Zero-Scroll */
+    .app-canvas {
+      position: relative;
+      height: 100dvh;
+      max-height: 100dvh;
+      aspect-ratio: 900 / 1700;
+      width: auto;
+      max-width: 100vw;
+      background-color: #FFFFFF;
+      /* Puedes activar tu fondo personalizado aquí descomentando la siguiente línea: */
+      /* background-image: url('fondo-inacap.jpg'); background-size: 100% 100%; */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Retícula arquitectónica sutil en el centro */
+    .app-canvas::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* HEADER */
+    .header {
+      position: relative;
+      z-index: 2;
+      padding: 3.2vh 5% 1.5vh;
+      text-align: center;
+      background: linear-gradient(180deg, #FFFFFF 75%, rgba(255,255,255,0) 100%);
+    }
+
+    .brand-bar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 0.8vh;
+    }
+
+    .brand-logo {
+      background: var(--red-inacap);
+      color: #FFF;
+      font-weight: 900;
+      font-size: clamp(18px, 2.8vh, 26px);
+      letter-spacing: 1.5px;
+      padding: 4px 14px;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(227, 6, 19, 0.25);
+    }
+
+    .pilot-tag {
+      background: var(--dark);
+      color: #FFF;
+      font-size: clamp(9px, 1.2vh, 11px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .header h1 {
+      font-size: clamp(16px, 2.3vh, 22px);
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.15;
+    }
+
+    .location-pill {
+      margin-top: 1vh;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFF1F2;
+      border: 1px solid #FECDD3;
+      color: var(--red-dark);
+      font-size: clamp(10px, 1.35vh, 13px);
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--red-inacap);
+      border-radius: 50%;
+      animation: pulse 1.6s infinite;
+    }
+
+    /* BOTONERA CENTRAL */
+    .menu-grid {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5vh;
+      padding: 0 6%;
+    }
+
+    .menu-btn {
+      position: relative;
+      width: 100%;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 1.6vh 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .menu-btn:active {
+      transform: scale(0.97);
+    }
+
+    .menu-btn.primary {
+      background: linear-gradient(135deg, var(--red-inacap) 0%, var(--red-dark) 100%);
+      border-color: var(--red-inacap);
+      color: #FFFFFF;
+      box-shadow: 0 8px 20px rgba(227, 6, 19, 0.28);
+    }
+
+    .btn-icon {
+      width: clamp(38px, 5.2vh, 48px);
+      height: clamp(38px, 5.2vh, 48px);
+      border-radius: 12px;
+      background: var(--gray-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(18px, 2.5vh, 24px);
+      flex-shrink: 0;
+    }
+
+    .menu-btn.primary .btn-icon {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .btn-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .btn-title {
+      font-size: clamp(13px, 1.85vh, 17px);
+      font-weight: 800;
+      color: var(--dark);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .menu-btn.primary .btn-title {
+      color: #FFFFFF;
+    }
+
+    .btn-sub {
+      font-size: clamp(10px, 1.35vh, 12.5px);
+      color: var(--gray-text);
+      display: block;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-btn.primary .btn-sub {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    /* Mano táctil pulsante obligatoria */
+    .touch-hand {
+      font-size: clamp(16px, 2.2vh, 20px);
+      opacity: 0.85;
+      animation: tapHint 1.8s infinite ease-in-out;
+      flex-shrink: 0;
+    }
+
+    /* Fila doble para botones secundarios */
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-row .menu-btn {
+      padding: 1.5vh 12px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .btn-row .btn-top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* FOOTER FIJO: EXCLUSIVO UBICACIÓN Y CÓMO LLEGAR */
+    .footer-location {
+      position: relative;
+      z-index: 2;
+      background: var(--dark);
+      color: #FFFFFF;
+      padding: 1.8vh 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      border-top: 3px solid var(--red-inacap);
+    }
+
+    .footer-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .footer-label {
+      font-size: clamp(9px, 1.15vh, 11px);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #FCA5A5;
+      font-weight: 700;
+    }
+
+    .footer-address {
+      font-size: clamp(11px, 1.5vh, 14px);
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .footer-cta {
+      background: var(--red-inacap);
+      color: #FFF;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: clamp(10px, 1.35vh, 12px);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(227, 6, 19, 0.4);
+    }
+
+    /* MODALES INTERACTIVOS */
+    .modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(4px);
+      z-index: 20;
+      display: none;
+      flex-direction: column;
+      justify-content: flex-end;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-sheet {
+      background: #FFFFFF;
+      width: 100%;
+      height: 92%;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+    }
+
+    .modal-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFF;
+    }
+
+    .modal-header h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: var(--gray-light);
+      color: var(--dark);
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* VISOR 3D */
+    .viewer-wrapper {
+      position: relative;
+      width: 100%;
+      height: 44%;
+      background: radial-gradient(circle at center, #F8FAFC 0%, #E2E8F0 100%);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    #three-container {
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .viewer-hint {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      background: rgba(26, 26, 26, 0.78);
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .safety-toggle {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--safe-green);
+      color: var(--safe-green);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .safety-toggle.on {
+      background: var(--safe-green);
+      color: #FFFFFF;
+    }
+
+    .floor-controls {
+      flex: 1;
+      padding: 14px 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .route-banner {
+      background: #FEF2F2;
+      border-left: 4px solid var(--red-inacap);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .poi-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .poi-card {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 9px 10px;
+      background: #FFF;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s;
+    }
+
+    .poi-card.selected {
+      border-color: var(--red-inacap);
+      background: #FFF1F2;
+    }
+
+    .poi-card strong {
+      display: block;
+      font-size: 12.5px;
+      color: var(--dark);
+    }
+
+    .poi-card span {
+      font-size: 11px;
+      color: var(--gray-text);
+    }
+
+    .safety-legend {
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      color: #14532D;
+      display: none;
+    }
+
+    .safety-legend.visible {
+      display: block;
+    }
+
+    .legend-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      font-weight: 700;
+    }
+
+    /* CONTENIDO OTROS MODALES */
+    .modal-body {
+      padding: 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--red-inacap);
+    }
+
+    .info-card {
+      background: var(--gray-light);
+      border-radius: 12px;
+      padding: 12px 14px;
+      border-left: 4px solid var(--red-inacap);
+    }
+
+    .info-card h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .info-card p {
+      font-size: 12.5px;
+      color: var(--gray-text);
+      line-height: 1.4;
+    }
+
+    .call-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--red-inacap);
+      color: #FFF;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 13px;
+      border-radius: 12px;
+      margin-top: 6px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.5; }
+    }
+
+    @keyframes tapHint {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.15) translateY(-2px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="app-canvas">
+    <!-- ENCABEZADO -->
+    <header class="header">
+      <div class="brand-bar">
+        <span class="brand-logo">INACAP</span>
+        <span class="pilot-tag">Sede Apoquindo • Piloto</span>
+      </div>
+      <h1>Directorio Interactivo y Seguridad</h1>
+      <div class="location-pill">
+        <span class="pulse-dot"></span>
+        <span>Estás aquí: Tótem Hall Central • Piso 1</span>
+      </div>
+    </header>
+
+    <!-- BOTONERA CENTRAL -->
+    <section class="menu-grid">
+      <button class="menu-btn primary" onclick="openFloorModal(1)">
+        <div class="btn-icon">🏢</div>
+        <div class="btn-text">
+          <span class="btn-title">Piso 1 — Acceso y Servicios</span>
+          <span class="btn-sub">Auditorio, Biblioteca, DAE, Casino y Extintores</span>
+        </div>
+        <span class="touch-hand">👆</span>
+      </button>
+
+      <button class="menu-btn" onclick="openFloorModal(2)">
+        <div class="btn-icon">🎓</div>
+        <div class="btn-text">
+          <span class="btn-title">Piso 2 — Aulas y Laboratorios</span>
+          <span class="btn-sub">Salas 201–210, Lab. Computación y Red Húmeda</span>
+        </div>
+        <span class="touch-hand">👆</span>
+      </button>
+
+      <button class="menu-btn" onclick="openModal('searchModal')">
+        <div class="btn-icon">🔍</div>
+        <div class="btn-text">
+          <span class="btn-title">¿A dónde vas? Buscador Rápido</span>
+          <span class="btn-sub">Encuentra salas, seminarios, baños o vías de escape</span>
+        </div>
+        <span class="touch-hand">👆</span>
+      </button>
+
+      <div class="btn-row">
+        <button class="menu-btn" onclick="openModal('hoursModal')">
+          <div class="btn-top">
+            <div class="btn-icon">🕒</div>
+            <span class="touch-hand">👆</span>
+          </div>
+          <div class="btn-text">
+            <span class="btn-title">Horarios</span>
+            <span class="btn-sub">Biblioteca, DAE y Sede</span>
+          </div>
+        </button>
+
+        <button class="menu-btn" onclick="openModal('contactModal')">
+          <div class="btn-top">
+            <div class="btn-icon">📞</div>
+            <span class="touch-hand">👆</span>
+          </div>
+          <div class="btn-text">
+            <span class="btn-title">Central Sede</span>
+            <span class="btn-sub">Mesa ayuda y anexos</span>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- FOOTER FIJO EXCLUSIVO UBICACIÓN Y CÓMO LLEGAR -->
+    <footer class="footer-location" onclick="openModal('locationModal')">
+      <div class="footer-info">
+        <div class="footer-label">Ubicación y Cómo Llegar</div>
+        <div class="footer-address">Av. Apoquindo 7282, Las Condes</div>
+      </div>
+      <div class="footer-cta">
+        <span>📍</span>
+        <span>Mapa</span>
+      </div>
+    </footer>
+
+    <!-- MODAL 1: VISOR 3D DE PISOS + NORMATIVA SEGURIDAD -->
+    <div id="floorModal" class="modal-overlay">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2 id="floorTitle">Plano 3D — Piso 1</h2>
+          <button class="close-btn" onclick="closeModal('floorModal')">✕</button>
+        </div>
+
+        <div class="viewer-wrapper">
+          <div id="three-container"></div>
+          <div class="viewer-hint">👆 Arrastra para rotar el plano 3D</div>
+          <button id="safetyBtn" class="safety-toggle" onclick="toggleSafetyLayer()">
+            <span>🛡️</span>
+            <span id="safetyBtnText">Ver Extintores y Redes</span>
+          </button>
+        </div>
+
+        <div class="floor-controls">
+          <div id="routeBanner" class="route-banner">
+            📍 Toca un destino abajo para trazar la ruta en 3D desde el punto de inicio.
+          </div>
+
+          <div id="safetyLegend" class="safety-legend">
+            <strong>Capa Normativa Activa (Prevención de Riesgos):</strong>
+            <div class="legend-items">
+              <span>🧯 Extintor PQS</span>
+              <span>🔵 Red Húmeda</span>
+              <span>🟠 Red Seca</span>
+              <span>🟢 Vía Evacuación</span>
+            </div>
+          </div>
+
+          <div id="poiList" class="poi-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 2: BUSCADOR RÁPIDO -->
+    <div id="searchModal" class="modal-overlay">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2>🔍 Buscador de Espacios y Seguridad</h2>
+          <button class="close-btn" onclick="closeModal('searchModal')">✕</button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="searchInput" class="search-input" placeholder="Ej: Auditorio, Sala 204, Biblioteca, Extintor..." oninput="filterSearch()" />
+          <div id="searchResults" style="display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 3: HORARIOS INSTITUCIONALES -->
+    <div id="hoursModal" class="modal-overlay">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2>🕒 Horarios Oficiales de Sede</h2>
+          <button class="close-btn" onclick="closeModal('hoursModal')">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="info-card">
+            <h3>🏫 Apertura y Cierre de Sede</h3>
+            <p>Lunes a Viernes: 07:30 a 22:45 hrs.<br>Sábados: 08:00 a 18:00 hrs.</p>
+          </div>
+          <div class="info-card">
+            <h3>📚 Biblioteca y Salas de Estudio</h3>
+            <p>Lunes a Viernes: 08:00 a 21:30 hrs.<br>Sábados: 09:00 a 14:00 hrs.</p>
+          </div>
+          <div class="info-card">
+            <h3>🎓 Punto Estudiantil (DAE)</h3>
+            <p>Lunes a Viernes: 08:30 a 20:30 hrs. (Atención continuada).</p>
+          </div>
+          <div class="info-card">
+            <h3>☕ Casino y Cafetería (Piso 1)</h3>
+            <p>Lunes a Viernes: 08:00 a 21:00 hrs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 4: CENTRAL TELEFÓNICA -->
+    <div id="contactModal" class="modal-overlay">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2>📞 Central e Informaciones</h2>
+          <button class="close-btn" onclick="closeModal('contactModal')">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="info-card">
+            <h3>Recepción y Mesa Central Sede</h3>
+            <p>Consultas de seminarios, salas asignadas y orientación general.</p>
+            <a href="tel:+56225797200" class="call-btn">📲 Llamar a Central (+56 2 2579 7200)</a>
+          </div>
+          <div class="info-card" style="border-left-color: #16A34A;">
+            <h3>🚨 Emergencias y Prevención Interna</h3>
+            <p>Anexo interno de seguridad y primeros auxilios: <strong>Anexo 4111</strong> (Portería Hall Central).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 5: UBICACIÓN Y CÓMO LLEGAR -->
+    <div id="locationModal" class="modal-overlay">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2>📍 Ubicación Sede Apoquindo</h2>
+          <button class="close-btn" onclick="closeModal('locationModal')">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="info-card">
+            <h3>Dirección Oficial</h3>
+            <p><strong>Av. Apoquindo 7282, Las Condes, Santiago.</strong></p>
+          </div>
+          <div class="info-card">
+            <h3>🚇 Transporte Público</h3>
+            <p><strong>Metro Línea 1:</strong> Estación Hernando de Magallanes (a 3 minutos caminando hacia el oriente).<br><strong>Paraderos Red:</strong> PC165 / PC184 frente al acceso principal.</p>
+          </div>
+          <a href="https://maps.google.com/?q=Av.+Apoquindo+7282,+Las+Condes,+Chile" target="_blank" class="call-btn">
+            🗺️ Abrir Ruta en Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // DATOS DE PISOS Y PUNTOS DE INTERÉS
+    const floorsData = {
+      1: {
+        title: "Plano 3D — Piso 1 (Acceso y Servicios)",
+        start: { x: 0, z: 3.2, label: "Tótem Hall Central" },
+        rooms: [
+          { id: "auditorio", name: "Auditorio Seminarios", desc: "Ala Poniente • 1 min", x: -3.2, z: -1.5, w: 3.2, d: 3.4, color: 0xE30613 },
+          { id: "biblioteca", name: "Biblioteca Central", desc: "Ala Oriente • 1 min", x: 3.2, z: -1.5, w: 3.2, d: 3.4, color: 0x2563EB },
+          { id: "dae", name: "Punto Estudiantil DAE", desc: "Costado Hall • 30 seg", x: -2.8, z: 2.2, w: 2.4, d: 2.0, color: 0x0D9488 },
+          { id: "casino", name: "Casino y Cafetería", desc: "Sector Norte • 1.5 min", x: 0, z: -3.0, w: 2.6, d: 2.0, color: 0xD97706 },
+          { id: "banos1", name: "Baños / Accesibilidad", desc: "Pasillo Oriente • 45 seg", x: 2.8, z: 2.2, w: 2.2, d: 2.0, color: 0x64748B }
+        ],
+        safety: [
+          { type: "Extintor PQS", x: -1.4, z: 3.2, color: 0xDC2626 },
+          { type: "Extintor CO2", x: 1.4, z: -1.5, color: 0xDC2626 },
+          { type: "Red Húmeda", x: -1.4, z: -1.5, color: 0x0284C7 },
+          { type: "Red Seca", x: 3.8, z: 0.6, color: 0xEA580C },
+          { type: "Salida Emergencia", x: 0, z: 4.1, color: 0x16A34A }
+        ]
+      },
+      2: {
+        title: "Plano 3D — Piso 2 (Aulas y Laboratorios)",
+        start: { x: 0, z: 3.2, label: "Caja Escaleras / Ascensor" },
+        rooms: [
+          { id: "lab1", name: "Lab. Computación 201", desc: "Ala Poniente • 45 seg", x: -3.2, z: -1.5, w: 3.2, d: 3.4, color: 0x7C3AED },
+          { id: "sala204", name: "Salas 202 a 206", desc: "Ala Oriente • 1 min", x: 3.2, z: -1.5, w: 3.2, d: 3.4, color: 0x2563EB },
+          { id: "docentes", name: "Sala de Profesores", desc: "Sector Sur-Poniente • 30 seg", x: -2.8, z: 2.2, w: 2.4, d: 2.0, color: 0x0D9488 },
+          { id: "sala208", name: "Taller Diseño 208", desc: "Sector Norte • 1 min", x: 0, z: -3.0, w: 2.8, d: 2.0, color: 0xE30613 },
+          { id: "banos2", name: "Baños Piso 2", desc: "Pasillo Oriente • 30 seg", x: 2.8, z: 2.2, w: 2.2, d: 2.0, color: 0x64748B }
+        ],
+        safety: [
+          { type: "Extintor PQS", x: -1.3, z: 3.0, color: 0xDC2626 },
+          { type: "Extintor PQS", x: 1.5, z: -2.5, color: 0xDC2626 },
+          { type: "Red Húmeda", x: 1.4, z: 1.5, color: 0x0284C7 },
+          { type: "Red Seca", x: -3.8, z: 0.5, color: 0xEA580C },
+          { type: "Vía Evacuación", x: 0, z: 4.1, color: 0x16A34A }
+        ]
+      }
+    };
+
+    // VARIABLES THREE.JS
+    let scene, camera, renderer, buildingGroup, safetyGroup, routeLine;
+    let currentFloor = 1;
+    let safetyVisible = false;
+    let isDragging = false;
+    let prevX = 0, prevY = 0;
+    let targetRotY = -0.45, targetRotX = 0.55;
+
+    function init3D() {
+      const container = document.getElementById('three-container');
+      scene = new THREE.Scene();
+
+      camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 100);
+      camera.position.set(0, 9.5, 11.5);
+      camera.lookAt(0, 0, 0);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.innerHTML = '';
+      container.appendChild(renderer.domElement);
+
+      const ambient = new THREE.AmbientLight(0xffffff, 0.75);
+      scene.add(ambient);
+
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.65);
+      dirLight.position.set(6, 14, 8);
+      scene.add(dirLight);
+
+      buildingGroup = new THREE.Group();
+      scene.add(buildingGroup);
+
+      // Controles táctiles y mouse para rotar maqueta
+      const dom = renderer.domElement;
+      dom.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        prevX = e.clientX;
+        prevY = e.clientY;
+      });
+      window.addEventListener('pointerup', () => isDragging = false);
+      dom.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - prevX;
+        const dy = e.clientY - prevY;
+        targetRotY += dx * 0.012;
+        targetRotX = Math.max(0.2, Math.min(1.1, targetRotX + dy * 0.01));
+        prevX = e.clientX;
+        prevY = e.clientY;
+      });
+
+      animate3D();
+    }
+
+    function buildFloor3D(floorNum) {
+      while (buildingGroup.children.length > 0) {
+        buildingGroup.remove(buildingGroup.children[0]);
+      }
+      routeLine = null;
+
+      const data = floorsData[floorNum];
+
+      // Losa base del piso
+      const baseGeo = new THREE.BoxGeometry(10.5, 0.25, 9.2);
+      const baseMat = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+      const baseMesh = new THREE.Mesh(baseGeo, baseMat);
+      baseMesh.position.y = -0.15;
+      buildingGroup.add(baseMesh);
+
+      // Borde rojo institucional de la losa
+      const edges = new THREE.EdgesGeometry(baseGeo);
+      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x94A3B8 }));
+      line.position.y = -0.15;
+      buildingGroup.add(line);
+
+      // Salas / Zonas en 3D
+      data.rooms.forEach(room => {
+        const geo = new THREE.BoxGeometry(room.w, 0.85, room.d);
+        const mat = new THREE.MeshLambertMaterial({ color: room.color, transparent: true, opacity: 0.85 });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(room.x, 0.42, room.z);
+        buildingGroup.add(mesh);
+
+        const rEdges = new THREE.EdgesGeometry(geo);
+        const rLine = new THREE.LineSegments(rEdges, new THREE.LineBasicMaterial({ color: 0x1E293B }));
+        rLine.position.copy(mesh.position);
+        buildingGroup.add(rLine);
+      });
+
+      // Pin "Estás Aquí"
+      const pinGeo = new THREE.CylinderGeometry(0.28, 0.05, 0.9, 16);
+      const pinMat = new THREE.MeshLambertMaterial({ color: 0xE30613 });
+      const pin = new THREE.Mesh(pinGeo, pinMat);
+      pin.position.set(data.start.x, 0.55, data.start.z);
+      buildingGroup.add(pin);
+
+      // Grupo de Seguridad (Extintores, Red Húmeda, Red Seca, Evacuación)
+      safetyGroup = new THREE.Group();
+      data.safety.forEach(item => {
+        const sGeo = new THREE.SphereGeometry(0.24, 16, 16);
+        const sMat = new THREE.MeshLambertMaterial({ color: item.color });
+        const sMesh = new THREE.Mesh(sGeo, sMat);
+        sMesh.position.set(item.x, 0.65, item.z);
+        safetyGroup.add(sMesh);
+      });
+      safetyGroup.visible = safetyVisible;
+      buildingGroup.add(safetyGroup);
+    }
+
+    function drawRouteTo(room) {
+      if (routeLine) buildingGroup.remove(routeLine);
+      const start = floorsData[currentFloor].start;
+
+      const points = [
+        new THREE.Vector3(start.x, 0.15, start.z),
+        new THREE.Vector3(0, 0.15, room.z),
+        new THREE.Vector3(room.x, 0.15, room.z)
+      ];
+
+      const curve = new THREE.CatmullRomCurve3(points);
+      const tubeGeo = new THREE.TubeGeometry(curve, 24, 0.11, 8, false);
+      const tubeMat = new THREE.MeshBasicMaterial({ color: 0xE30613 });
+      routeLine = new THREE.Mesh(tubeGeo, tubeMat);
+      buildingGroup.add(routeLine);
+    }
+
+    function animate3D() {
+      requestAnimationFrame(animate3D);
+      if (buildingGroup) {
+        buildingGroup.rotation.y += (targetRotY - buildingGroup.rotation.y) * 0.12;
+        buildingGroup.rotation.x += (targetRotX - buildingGroup.rotation.x) * 0.12;
+      }
+      if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+      }
+    }
+
+    // UI INTERACTIVA
+    function openFloorModal(floorNum, autoSelectId = null) {
+      currentFloor = floorNum;
+      const data = floorsData[floorNum];
+      document.getElementById('floorTitle').textContent = data.title;
+      document.getElementById('routeBanner').textContent = `📍 Origen: ${data.start.label}. Toca un destino para ver la ruta 3D.`;
+
+      const poiList = document.getElementById('poiList');
+      poiList.innerHTML = '';
+
+      data.rooms.forEach(room => {
+        const btn = document.createElement('button');
+        btn.className = 'poi-card';
+        btn.innerHTML = `<strong>${room.name}</strong><span>${room.desc}</span>`;
+        btn.onclick = () => {
+          document.querySelectorAll('.poi-card').forEach(c => c.classList.remove('selected'));
+          btn.classList.add('selected');
+          document.getElementById('routeBanner').innerHTML = `🧭 Ruta trazada hacia <strong>${room.name}</strong> (${room.desc})`;
+          drawRouteTo(room);
+        };
+        poiList.appendChild(btn);
+
+        if (autoSelectId === room.id) {
+          setTimeout(() => btn.click(), 120);
+        }
+      });
+
+      openModal('floorModal');
+      setTimeout(() => {
+        if (!renderer) init3D();
+        else {
+          const container = document.getElementById('three-container');
+          renderer.setSize(container.clientWidth, container.clientHeight);
+          camera.aspect = container.clientWidth / container.clientHeight;
+          camera.updateProjectionMatrix();
+        }
+        buildFloor3D(floorNum);
+      }, 60);
+    }
+
+    function toggleSafetyLayer() {
+      safetyVisible = !safetyVisible;
+      if (safetyGroup) safetyGroup.visible = safetyVisible;
+      const btn = document.getElementById('safetyBtn');
+      const legend = document.getElementById('safetyLegend');
+      if (safetyVisible) {
+        btn.classList.add('on');
+        document.getElementById('safetyBtnText').textContent = 'Seguridad Activa ✓';
+        legend.classList.add('visible');
+      } else {
+        btn.classList.remove('on');
+        document.getElementById('safetyBtnText').textContent = 'Ver Extintores y Redes';
+        legend.classList.remove('visible');
+      }
+    }
+
+    // BUSCADOR GLOBAL
+    function filterSearch() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const container = document.getElementById('searchResults');
+      container.innerHTML = '';
+
+      [1, 2].forEach(floor => {
+        floorsData[floor].rooms.forEach(room => {
+          if (room.name.toLowerCase().includes(q) || room.desc.toLowerCase().includes(q)) {
+            const card = document.createElement('div');
+            card.className = 'info-card';
+            card.style.cursor = 'pointer';
+            card.innerHTML = `<h3>${room.name} (Piso ${floor})</h3><p>${room.desc} — Toca para abrir en el plano 3D ➔</p>`;
+            card.onclick = () => {
+              closeModal('searchModal');
+              openFloorModal(floor, room.id);
+            };
+            container.appendChild(card);
+          }
+        });
+      });
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+      if (id === 'searchModal') {
+        document.getElementById('searchInput').value = '';
+        filterSearch();
+      }
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+  </script>
+</body>
+</html>
